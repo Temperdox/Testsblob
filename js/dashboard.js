@@ -87,6 +87,39 @@ function createPoints() {
   return points;
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+
+const animated = document.querySelector('.square');
+
+animated.addEventListener('animationend', () => {
+  console.log('Animation ended');
+  sleep(100).then(() => {
+    fadeIn();
+  });
+  });
+
+let opacity = 0;
+let intervalID = 0;
+
+function fadeIn() {
+  setInterval(show, 200);
+}
+
+function show() {
+  var body = document.querySelector('.square2');
+  opacity = Number(window.getComputedStyle(body)
+    .getPropertyValue("opacity"));
+  if (opacity < 1) {
+    opacity = opacity + 0.1;
+    body.style.opacity = opacity;
+  } else {
+    clearInterval(intervalID);
+  }
+}
+
 $(window).scroll(function() {
   var scroll = $(window).scrollTop();
 
